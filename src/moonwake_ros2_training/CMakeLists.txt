@@ -25,13 +25,26 @@ endif()
 add_executable(heartbeat_node src/heartbeat_node.cpp)
 add_executable(talker_node src/talker_node.cpp)
 add_executable(listener_node src/listener_node.cpp)
+add_executable(target_offset_publisher src/target_offset_publisher.cpp)
+add_executable(steering_hint_node src/steering_hint_node.cpp)
+
 ament_target_dependencies(heartbeat_node rclcpp)
 ament_target_dependencies(talker_node rclcpp std_msgs)
 ament_target_dependencies(listener_node rclcpp std_msgs)
+ament_target_dependencies(target_offset_publisher rclcpp std_msgs)
+ament_target_dependencies(steering_hint_node rclcpp std_msgs)
+
 install(TARGETS
   heartbeat_node
   talker_node
   listener_node
+  target_offset_publisher
+  steering_hint_node
   DESTINATION lib/${PROJECT_NAME})
 
+install(DIRECTORY
+  config
+  launch
+  DESTINATION share/${PROJECT_NAME})
+  
 ament_package()
